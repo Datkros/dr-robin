@@ -1,4 +1,4 @@
-# Dr-robin
+# Dr. Robin
 Dr. Robin is a Windows-based application to keep track of your pets's medical records. Currently in Development
 
 
