@@ -8,4 +8,11 @@ What dependencies you need:
 * matplotlib
 * Python 2.7
 
+TODO List:
+
+* Add functionality to already implemented menus such as 'Ayuda', 'Archivo', etc.
+* Implement vaccines, medications & weight editing.
+* Add more buttons & tools.
+* Think of more features to add.
+
 This readme is currently in development.
