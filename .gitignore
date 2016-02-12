@@ -46,3 +46,6 @@ Temporary Items
 Sentencias SQL.txt
 control_robindb.sqlite
 *.ui
+registroVa_ui.py
+vacuna_ui.py
+regmasc_ui.py
