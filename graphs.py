@@ -15,15 +15,16 @@ rcParams.update({'figure.autolayout': True})
 db = SQL_Requests()
 
 class Grafica(FigureCanvas):
-
-	""" Generates the equivalent to a 'QGraphicView' object to hold the information"""
 	
     def __init__(self, parent=None, width=5, height=3, dpi=100, mascota_id=None):
         fig = Figure(figsize=(width, height), dpi=dpi,facecolor='white')
         self.axes = fig.add_subplot(111)
+        # We want the axes cleared every time plot() is called
         self.axes.hold(False)
 
-        self.computa_figura(mascota_id)
+        self.compute_initial_figure(mascota_id)
+
+        #
         FigureCanvas.__init__(self, fig)
         self.setParent(parent)
 
@@ -31,20 +32,15 @@ class Grafica(FigureCanvas):
                                    QtGui.QSizePolicy.Expanding,
                                    QtGui.QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
-	def computa_figura(self,mascota_id):
+	def compute_initial_figure(self,mascota_id):
 		pass
 
 class GraficaPeso(Grafica):
 
-	""" We extend the code from 'Grafica' as to set the plot themselves within the figure. """
-
     def __init__(self, *args, **kwargs):
         Grafica.__init__(self, *args, **kwargs)
 
-    def computa_figura(self,mascota_id):
-		
-		"""	Sets the weight/year data from a given pet into the figure.	"""
-		
+    def compute_initial_figure(self,mascota_id):
         lista = db.obtienePeso(mascota_id)
         pesos = []
         fechas = []
@@ -52,7 +48,7 @@ class GraficaPeso(Grafica):
             pesos.append(peso)
             fechas.append(datetime.datetime.strptime(fecha, '%Y-%m-%d').strftime('%d/%m/%y'))
         self.axes.plot(pesos)
-        self.axes.set_ylim(0,10)
+        self.axes.set_ylim(0,max(pesos))
         self.axes.set_xticks(range(len(fechas)), minor=False)
         self.axes.set_xticklabels(fechas, fontdict=None, minor=False, rotation=30)
         self.axes.set_xlabel('Fecha')
